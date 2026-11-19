@@ -1,12 +1,17 @@
 import 'dart:math';
-import '../models/checkin.dart';
-import '../l10n/app_localizations.dart';
 
-enum SuggestionArea { sleep, stress, energy, activity, nutrition }
+import 'package:flutter/widgets.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
+
+/// The goal areas from "Choose your goals".
+enum Goal { sleep, stress, energy, activity, nutrition }
+
+enum SuggestionStatus { pending, done, skipped }
 
 class Suggestion {
   final String id;
-  final SuggestionArea area;
+  final Goal area;
+  final IconData icon;
   final String titleEn;
   final String titleAr;
   final String rationaleEn;
@@ -15,155 +20,207 @@ class Suggestion {
   const Suggestion({
     required this.id,
     required this.area,
+    required this.icon,
     required this.titleEn,
     required this.titleAr,
     required this.rationaleEn,
     required this.rationaleAr,
   });
 
-  String getTitle(AppLocalizations t) {
-    return t.locale.languageCode == 'ar' ? titleAr : titleEn;
-  }
+  String title(String lang) => lang == 'ar' ? titleAr : titleEn;
+  String rationale(String lang) => lang == 'ar' ? rationaleAr : rationaleEn;
+}
 
-  String getRationale(AppLocalizations t) {
-    return t.locale.languageCode == 'ar' ? rationaleAr : rationaleEn;
-  }
+/// What the user did with one suggestion today.
+class SuggestionState {
+  final SuggestionStatus status;
+  final bool? helpful; // thumbs up = true, down = false
+  const SuggestionState({this.status = SuggestionStatus.pending, this.helpful});
+
+  SuggestionState copyWith({SuggestionStatus? status, bool? helpful, bool clearHelpful = false}) =>
+      SuggestionState(
+        status: status ?? this.status,
+        helpful: clearHelpful ? null : (helpful ?? this.helpful),
+      );
+
+  Map<String, dynamic> toMap() => {'status': status.name, if (helpful != null) 'helpful': helpful};
+
+  factory SuggestionState.fromMap(Map<String, dynamic> m) => SuggestionState(
+    status: SuggestionStatus.values.firstWhere(
+      (s) => s.name == m['status'],
+      orElse: () => SuggestionStatus.pending,
+    ),
+    helpful: m['helpful'] as bool?,
+  );
 }
 
 class SuggestionsService {
-  static const suggestions = [
+  static const all = <Suggestion>[
     // Sleep
     Suggestion(
-      id: 'sleep_1',
-      area: SuggestionArea.sleep,
+      id: 'sleep_phone',
+      area: Goal.sleep,
+      icon: LucideIcons.moon,
       titleEn: 'Put your phone away 30 minutes before bed',
       titleAr: 'ابعد موبايلك قبل النوم بنص ساعة',
       rationaleEn: 'A small wind-down experiment, inspired by your evening notes. Notice how tomorrow feels.',
-      rationaleAr: 'تجربة صغيرة لليلة دي، مستوحاة من ملاحظاتك المسائية. شوف بكرة بيحسّك إزاي.',
+      rationaleAr: 'تجربة صغيرة لليلة دي. شوف إيه يناسبك، من غير ما تبقى قاعدة لازم تمشي عليها.',
     ),
     Suggestion(
-      id: 'sleep_2',
-      area: SuggestionArea.sleep,
-      titleEn: 'Try going to bed at the same time tonight',
-      titleAr: 'حاول تنام في نفس الموعد الليلة',
-      rationaleEn: 'Consistency helps your body know when to rest.',
-      rationaleAr: 'الاستمرارية بتعرف جسمك إمتى يرتاح.',
+      id: 'sleep_same_time',
+      area: Goal.sleep,
+      icon: LucideIcons.bedDouble,
+      titleEn: 'Aim for the same bedtime as last night',
+      titleAr: 'حاول تنام في نفس معاد امبارح',
+      rationaleEn: 'A steadier rhythm can make it easier to wind down. No alarm needed for this one.',
+      rationaleAr: 'لما المواعيد تبقى ثابتة شوية، الهدوء قبل النوم بيبقى أسهل.',
     ),
     Suggestion(
-      id: 'sleep_3',
-      area: SuggestionArea.sleep,
-      titleEn: 'Keep your room dark, quiet and a little cool',
-      titleAr: 'خلي غرفتك مظلمة وهادئة وباردة شوية',
-      rationaleEn: 'Your environment affects how easily you fall asleep.',
-      rationaleAr: 'بيئتك بتأثر إزاي بتنام بسهولة.',
+      id: 'sleep_dark_room',
+      area: Goal.sleep,
+      icon: LucideIcons.lampDesk,
+      titleEn: 'Dim the lights an hour before sleep',
+      titleAr: 'وطّي النور قبل النوم بساعة',
+      rationaleEn: 'Softer light in the evening is a gentle cue that the day is winding down.',
+      rationaleAr: 'النور الهادي بالليل إشارة لطيفة إن اليوم بيخلص.',
     ),
     // Stress
     Suggestion(
-      id: 'stress_1',
-      area: SuggestionArea.stress,
-      titleEn: 'Take a 5-minute break away from all screens',
-      titleAr: 'خذ راحة 5 دقايق بعيدًا عن كل الشاشات',
-      rationaleEn: 'A brief screen-free pause can reset your mind.',
-      rationaleAr: 'توقف سريع من غير شاشات ممكن يرجع دماغك.',
+      id: 'stress_study_break',
+      area: Goal.stress,
+      icon: LucideIcons.coffee,
+      titleEn: 'Take a 5-minute break every 50 minutes of study',
+      titleAr: 'خد بريك ٥ دقايق كل ٥٠ دقيقة مذاكرة',
+      rationaleEn: 'Stand up, stretch or look out the window. A pause doesn’t have to be productive.',
+      rationaleAr: 'قوم، اتمطّع، أو بص من الشباك. البريك مش لازم يكون مفيد.',
     ),
     Suggestion(
-      id: 'stress_2',
-      area: SuggestionArea.stress,
-      titleEn: 'Try box breathing: in for 4, hold for 4, out for 4, hold for 4',
-      titleAr: 'جرّب التنفس المربع: شهيق 4، احبس 4، زفير 4، احبس 4',
-      rationaleEn: 'A simple breathing technique to calm your nervous system.',
-      rationaleAr: 'تقنية تنفس بسيطة عشان تهدّي جهازك العصبي.',
+      id: 'stress_breathing',
+      area: Goal.stress,
+      icon: LucideIcons.wind,
+      titleEn: 'Try four slow breaths before your next task',
+      titleAr: 'جرّب أربع أنفاس بطيئة قبل المهمة الجاية',
+      rationaleEn: 'In for four, out for six. A tiny reset you can do anywhere.',
+      rationaleAr: 'شهيق لأربعة، زفير لستة. وقفة صغيرة تقدر تعملها في أي مكان.',
     ),
     Suggestion(
-      id: 'stress_3',
-      area: SuggestionArea.stress,
-      titleEn: 'Write down 3 things you\'re grateful for today',
-      titleAr: 'اكتب 3 حاجات شاكر فيها النهارده',
-      rationaleEn: 'Gratitude practice can shift your perspective.',
-      rationaleAr: 'ممارسة الامتنان ممكن تغير منظورك.',
+      id: 'stress_write_down',
+      area: Goal.stress,
+      icon: LucideIcons.notebookPen,
+      titleEn: 'Write down what’s on your mind, then close the notebook',
+      titleAr: 'اكتب اللي في دماغك، وبعدين اقفل الكشكول',
+      rationaleEn: 'Putting worries on paper can make them feel a little smaller.',
+      rationaleAr: 'لما تكتب اللي شاغلك، ممكن تحس إنه بقى أصغر شوية.',
     ),
     // Energy
     Suggestion(
-      id: 'energy_1',
-      area: SuggestionArea.energy,
-      titleEn: 'Take a 10-minute walk after your 2pm lecture',
-      titleAr: 'امشي 10 دقايق بعد محاضرة الساعة 2',
-      rationaleEn: 'Movement can boost your energy and mood.',
-      rationaleAr: 'الحركة ممكن تزيد طاقتك ومزاجك.',
+      id: 'energy_water',
+      area: Goal.energy,
+      icon: LucideIcons.glassWater,
+      titleEn: 'Start your day with a glass of water',
+      titleAr: 'ابدأ يومك بكوباية مية',
+      rationaleEn: 'An easy first step before coffee or your phone.',
+      rationaleAr: 'خطوة سهلة قبل القهوة أو الموبايل.',
     ),
     Suggestion(
-      id: 'energy_2',
-      area: SuggestionArea.energy,
-      titleEn: 'Drink a glass of water before anything else',
-      titleAr: 'اشرب كوب ماء قبل أي حاجة',
-      rationaleEn: 'Hydration affects your energy levels.',
-      rationaleAr: 'الترطيب بيأثر على مستويات طاقتك.',
+      id: 'energy_daylight',
+      area: Goal.energy,
+      icon: LucideIcons.sun,
+      titleEn: 'Get ten minutes of daylight before noon',
+      titleAr: 'اقعد في الشمس عشر دقايق قبل الضهر',
+      rationaleEn: 'A balcony, a walk to the bus or a coffee by the window all count.',
+      rationaleAr: 'البلكونة أو المشي للمواصلات أو قهوة جنب الشباك، كله ينفع.',
     ),
     Suggestion(
-      id: 'energy_3',
-      area: SuggestionArea.energy,
-      titleEn: 'Step outside for some fresh air and sunlight',
-      titleAr: 'خرج شوية عشان هوا نقي وشمس',
-      rationaleEn: 'Natural light and air can refresh you.',
-      rationaleAr: 'الضوء الطبيعي والهوا ممكن يحدّثوك.',
+      id: 'energy_caffeine',
+      area: Goal.energy,
+      icon: LucideIcons.cupSoda,
+      titleEn: 'Keep your last coffee before 3pm today',
+      titleAr: 'خلّي آخر قهوة النهارده قبل الساعة ٣',
+      rationaleEn: 'See whether an earlier cut-off changes how tonight feels.',
+      rationaleAr: 'شوف لو ده هيفرق في إحساسك بالليل.',
     ),
     // Activity
     Suggestion(
-      id: 'activity_1',
-      area: SuggestionArea.activity,
-      titleEn: 'Take the stairs instead of the elevator today',
-      titleAr: 'استخدم السلالم بدل المصعد اليوم',
-      rationaleEn: 'Small movements add up over the day.',
-      rationaleAr: 'الحركات الصغيرة بتكمل طول اليوم.',
+      id: 'activity_walk',
+      area: Goal.activity,
+      icon: LucideIcons.footprints,
+      titleEn: 'Take a 10-minute walk after your 2pm lecture',
+      titleAr: 'اتمشى ١٠ دقايق بعد محاضرة الساعة ٢',
+      rationaleEn:
+          'Your entries pair more movement with higher mood. A short walk is one way to explore that.',
+      rationaleAr: 'تسجيلاتك بتربط الحركة الأكتر بمزاج أحسن. مشية قصيرة طريقة تجرّب بيها ده.',
     ),
     Suggestion(
-      id: 'activity_2',
-      area: SuggestionArea.activity,
-      titleEn: 'Stretch for 5 minutes when you wake up',
-      titleAr: 'تمدد لمدة 5 دقايق لما تستيقظ',
-      rationaleEn: 'Gentle stretching starts your day positively.',
-      rationaleAr: 'التمدد اللطيف بيبدأ يومك بإيجابية.',
+      id: 'activity_stairs',
+      area: Goal.activity,
+      icon: LucideIcons.trendingUp,
+      titleEn: 'Take the stairs once today',
+      titleAr: 'اطلع السلم مرة النهارده',
+      rationaleEn: 'Small bits of movement add up across a day.',
+      rationaleAr: 'الحركة الصغيرة بتتجمع على مدار اليوم.',
     ),
     Suggestion(
-      id: 'activity_3',
-      area: SuggestionArea.activity,
-      titleEn: 'Dance to your favorite song for 3 minutes',
-      titleAr: 'رقص على أغنيتك المفضلة لمدة 3 دقايق',
-      rationaleEn: 'Music and movement lift your spirits.',
-      rationaleAr: 'الموسيقى والحركة بترفع روحك.',
+      id: 'activity_stretch',
+      area: Goal.activity,
+      icon: LucideIcons.personStanding,
+      titleEn: 'Stretch for five minutes when you get home',
+      titleAr: 'اتمطّع خمس دقايق أول ما توصل البيت',
+      rationaleEn: 'A gentle way to shift from the day into the evening.',
+      rationaleAr: 'طريقة لطيفة تنقلك من زحمة اليوم لهدوء الليل.',
     ),
     // Nutrition
     Suggestion(
-      id: 'nutrition_1',
-      area: SuggestionArea.nutrition,
-      titleEn: 'Eat a meal without distractions today',
-      titleAr: 'اكل وجبة من غير تشتتات النهارده',
-      rationaleEn: 'Mindful eating helps you enjoy your food more.',
-      rationaleAr: 'الأكل الواعي بيخليك تستمتع بأكلك أكتر.',
+      id: 'nutrition_breakfast',
+      area: Goal.nutrition,
+      icon: LucideIcons.eggFried,
+      titleEn: 'Eat something before your first class',
+      titleAr: 'كُل حاجة قبل أول محاضرة',
+      rationaleEn: 'Even a small breakfast counts. Notice how your morning goes.',
+      rationaleAr: 'حتى فطار صغير ينفع. لاحظ صباحك هيبقى عامل إزاي.',
     ),
     Suggestion(
-      id: 'nutrition_2',
-      area: SuggestionArea.nutrition,
-      titleEn: 'Drink a glass of water with every meal',
-      titleAr: 'اشرب كوب ماء مع كل وجبة',
-      rationaleEn: 'Hydration supports healthy digestion.',
-      rationaleAr: 'الترطيب بيدعم هضم صحي.',
+      id: 'nutrition_no_screen',
+      area: Goal.nutrition,
+      icon: LucideIcons.utensils,
+      titleEn: 'Have one meal today without a screen',
+      titleAr: 'كُل وجبة واحدة النهارده من غير شاشة',
+      rationaleEn: 'A quieter meal can be a small pause in a busy day.',
+      rationaleAr: 'وجبة هادية ممكن تبقى وقفة صغيرة في يوم زحمة.',
     ),
     Suggestion(
-      id: 'nutrition_3',
-      area: SuggestionArea.nutrition,
-      titleEn: 'Add one more vegetable to your plate today',
-      titleAr: 'ضيف خضار واحد كتر لطبقك النهارده',
-      rationaleEn: 'Small nutrition improvements build over time.',
-      rationaleAr: 'تحسينات تغذية صغيرة بتتكون مع الوقت.',
+      id: 'nutrition_fruit',
+      area: Goal.nutrition,
+      icon: LucideIcons.apple,
+      titleEn: 'Add a piece of fruit to your day',
+      titleAr: 'زوّد فاكهة على يومك',
+      rationaleEn: 'An easy snack to keep in your bag between lectures.',
+      rationaleAr: 'سناك سهل تشيله في شنطتك بين المحاضرات.',
     ),
   ];
 
-  // Get 3 suggestions for a specific date
-  static List<Suggestion> getSuggestionsForDate(DateTime date, List<String> userGoals) {
-    final random = Random(date.millisecondsSinceEpoch ~/ 86400000);
-    final available = suggestions.where((s) => userGoals.isEmpty || userGoals.contains(s.area.name)).toList();
-    available.shuffle(random);
-    return available.take(3).toList();
+  /// Nour's demo day, as shown in the design.
+  static const demoIds = ['activity_walk', 'sleep_phone', 'stress_study_break'];
+
+  static Suggestion byId(String id) => all.firstWhere((s) => s.id == id);
+
+  /// Three suggestions for [date], stable for the whole day,
+  /// spread across the user's goals (all areas if none chosen).
+  static List<Suggestion> forDate(DateTime date, List<Goal> goals) {
+    final areas = goals.isEmpty ? Goal.values : goals;
+    final seed = date.year * 10000 + date.month * 100 + date.day;
+    final random = Random(seed);
+    final pools = {for (final a in areas) a: (all.where((s) => s.area == a).toList()..shuffle(random))};
+    final order = [...areas]..shuffle(random);
+    final picked = <Suggestion>[];
+    var round = 0;
+    while (picked.length < 3 && round < 3) {
+      for (final a in order) {
+        if (picked.length == 3) break;
+        if (pools[a]!.length > round) picked.add(pools[a]![round]);
+      }
+      round++;
+    }
+    return picked;
   }
 }

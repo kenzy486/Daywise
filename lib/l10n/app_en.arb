@@ -2,424 +2,636 @@
   "@@locale": "en",
   "appTitle": "DayWise",
   "tagline": "Small habits. Your patterns. Better days.",
-  "switchLanguage": "العربية",
-
-  // Auth
-  "login": "Log in",
-  "signup": "Sign up",
-  "email": "Email address",
-  "password": "Password",
-  "confirmPassword": "Confirm password",
-  "forgotPassword": "Forgot password?",
-  "resetPasswordTitle": "No worries",
-  "resetPasswordInfo": "Let's get you back in.",
-  "sendResetLink": "Send reset link",
-  "resetEmailSent": "Check your email for a reset link.",
-  "noAccount": "New here? Create an account",
-  "haveAccount": "Already have an account? Sign in",
-  "logout": "Sign out",
+  "switchLanguage": "Switch language",
   "notMedicalAdvice": "DayWise supports healthy habits; it does not give medical advice.",
-
-  // Auth validation
+  "demoDisclosure": "Nour’s illustrative demo · not real health data",
+  "increase": "Increase",
+  "decrease": "Decrease",
+  "cancel": "Cancel",
+  "save": "Save",
+  "close": "Close",
+  "navToday": "Today",
+  "navCheckin": "Daily check-in",
+  "navInsights": "Insights",
+  "navInsightsLong": "Personal insights",
+  "navForYou": "For you",
+  "navSupport": "Support",
+  "yourSpace": "Your space",
+  "breadcrumb": "Your space / {page}",
+  "@breadcrumb": {
+    "placeholders": {
+      "page": {
+        "type": "String"
+      }
+    }
+  },
+  "welcomeEyebrow": "A LITTLE ROOM FOR YOU",
+  "welcomeTitle": "Better days start with a small hello.",
+  "email": "Email address",
+  "emailHint": "you@example.com",
+  "password": "Password",
+  "passwordCreateHint": "Create a password",
+  "passwordHint": "Your password",
+  "passwordHelper": "Use at least 8 characters.",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password",
+  "termsAgreement": "I agree to the Terms and Privacy Policy. My journal stays private by default.",
+  "termsRequired": "Please agree to the Terms and Privacy Policy to continue.",
+  "createAccount": "Create my free account",
+  "haveAccount": "Already have an account? Sign in",
+  "trustTitle": "No real name. No wearable. No pressure.",
+  "exploreDemo": "Just looking? Explore Nour’s demo",
+  "signInEyebrow": "WELCOME BACK",
+  "signInTitle": "Good to see you again.",
+  "signInBody": "Pick up where you left off. Your journal is just as you left it.",
+  "signIn": "Sign in",
+  "forgotPassword": "Forgot password?",
+  "noAccount": "New here? Create an account",
+  "resetEyebrow": "NO WORRIES",
+  "resetTitle": "Let’s get you back in.",
+  "resetBody": "Enter your email and we’ll send you a link to choose a new password.",
+  "sendResetLink": "Send reset link",
+  "resetEmailSent": "If an account exists for that email, a reset link is on its way.",
+  "backToSignIn": "Back to sign in",
   "errRequired": "This field is required.",
   "errInvalidEmail": "Please enter a valid email.",
   "errWeakPassword": "Use at least 8 characters.",
-  "errPasswordsDontMatch": "Passwords do not match.",
-  "errEmailInUse": "This email is already registered. Try logging in.",
+  "errEmailInUse": "This email is already registered. Try signing in.",
   "errWrongCredentials": "Email or password is incorrect.",
   "errTooManyRequests": "Too many attempts. Please wait and try again.",
-  "errNetwork": "No internet connection. Please try again.",
+  "errNetwork": "No connection. Check your internet and try again.",
   "errUnknown": "Something went wrong. Please try again.",
-
-  // Auth screen copy
-  "loginSubtitle": "Good to see you.",
-  "signupSubtitle": "Better days start with a small hello.",
-  "signupInfo": "Small habits. Your patterns. Better days.",
-  "backToLogin": "Back to sign in",
-  "loggedInAs": "Logged in as {email}",
-  "@loggedInAs": {
-    "placeholders": { "email": { "type": "String" } }
+  "errSaveFailed": "Couldn’t save right now. Please try again.",
+  "goalsEyebrow": "LET’S MAKE THIS YOURS · 1 OF 2",
+  "goalsTitle": "What would you like more room for?",
+  "goalsBody": "Choose what matters to you. You can change your mind anytime.",
+  "goalsSelected": "Choose one or more · {count} selected",
+  "@goalsSelected": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
-
-  // Navigation
-  "navToday": "Today",
-  "navInsights": "Insights",
-  "navForYou": "For you",
-  "navSupport": "Support",
-  "navDailyCheckin": "Daily check-in",
-  "navJournal": "Journal",
-
-  // Onboarding
-  "onboardingTitle": "LET'S MAKE THIS YOURS",
-  "onboardingStep1": "1 OF 2",
-  "onboardingStep2": "2 OF 2",
-  "onboardingGoalsTitle": "What would you like more room for?",
-  "onboardingGoalsSubtitle": "Choose what matters to you. You can change your mind anytime.",
-  "onboardingGoalsSelected": "Choose one or more · {count} selected",
-  "@onboardingGoalsSelected": {
-    "placeholders": { "count": { "type": "int" } }
+  "goalSleep": "Sleep better",
+  "goalSleepDesc": "Make a little room for rest",
+  "goalStress": "Less stress",
+  "goalStressDesc": "Find pauses that fit your day",
+  "goalEnergy": "More energy",
+  "goalEnergyDesc": "Notice what helps you recharge",
+  "goalActivity": "Activity",
+  "goalActivityDesc": "Move in ways that feel doable",
+  "goalNutrition": "Nutrition",
+  "goalNutritionDesc": "Explore everyday eating habits",
+  "goalsQuote": "No targets to chase. Just a direction that feels like you.",
+  "continueLabel": "Continue",
+  "decideLater": "I’ll decide later",
+  "nameEyebrow": "LET’S MAKE THIS YOURS · 2 OF 2",
+  "nameTitle": "What should we call you?",
+  "nameBody": "A nickname is plenty. It stays in your journal and is never shared.",
+  "nameLabel": "Nickname",
+  "nameHint": "e.g. Nour",
+  "startJournal": "Start my journal",
+  "back": "Back",
+  "todayTitle": "A little space for you, {name}.",
+  "@todayTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
-  "onboardingGoalSleep": "Sleep better",
-  "onboardingGoalSleepDesc": "Make a little room for rest",
-  "onboardingGoalStress": "Less stress",
-  "onboardingGoalStressDesc": "Find pauses that fit your day",
-  "onboardingGoalEnergy": "More energy",
-  "onboardingGoalEnergyDesc": "Notice what helps you recharge",
-  "onboardingGoalActivity": "Activity",
-  "onboardingGoalActivityDesc": "Move in ways that feel doable",
-  "onboardingGoalNutrition": "Nutrition",
-  "onboardingGoalNutritionDesc": "Explore everyday eating habits",
-  "onboardingGoalsNote": "No targets to chase. Just a direction that feels like you.",
-  "onboardingNicknameTitle": "What should we call you?",
-  "onboardingNicknameHelper": "No real name needed. A nickname is perfect.",
-  "onboardingCity": "Where are you based?",
-  "onboardingCityHelper": "City",
-  "onboardingWorkplace": "University or workplace (optional)",
-  "onboardingReminder": "Remind me gently at 9:00 pm",
-  "onboardingContinue": "Continue",
-  "onboardingStart": "Start my day",
-  "onboardingSkip": "Skip for now",
-  "onboardingDecideLater": "I'll decide later",
-
-  // Today screen
-  "todayGreeting": "A little space for you, {nickname}.",
-  "@todayGreeting": {
-    "placeholders": { "nickname": { "type": "String" } }
-  },
-  "todayGreetingGeneric": "A little space for you.",
-  "todaySubtitleMobile": "No perfect day needed. Just yours.",
+  "todayTitleNoName": "A little space for you.",
+  "todaySubtitle": "No perfect day needed. Just yours.",
   "todaySubtitleDesktop": "Notice your days. Be kind to the person living them.",
-  "todayOverview": "Your overview",
-  "todayOverviewDesktop": "Your week at a glance",
-  "last7Days": "7 days",
-  "last30Days": "30 days",
-  "checkinsCount": "{count} check-ins so far · {countInRange} in this range",
-  "@checkinsCount": {
-    "placeholders": { "count": { "type": "int" }, "countInRange": { "type": "int" } }
+  "yourOverview": "Your overview",
+  "weekAtGlance": "Your week at a glance",
+  "days7": "7 days",
+  "days30": "30 days",
+  "checkinsSoFar": "{total} check-ins so far · {inRange} in this range",
+  "@checkinsSoFar": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      },
+      "inRange": {
+        "type": "String"
+      }
+    }
   },
   "wellbeingTitle": "Well-being",
-  "wellbeingInfo": "A reflection of mood, energy and stress. Not a medical measure or a grade.",
-  "wellbeingInfoDesktop": "A reflection, not a diagnosis. Your score combines mood, energy and stress.",
-  "wellbeingLatest": "Latest · {date}",
-  "@wellbeingLatest": {
-    "placeholders": { "date": { "type": "String" } }
+  "latestOn": "Latest · {date}",
+  "@latestOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
-  "moodLabel": "Mood",
-  "energyLabel": "Energy",
-  "stressLabel": "Stress",
-  "checkinCTA": "How are you today? Check in",
-  "checkinCTADesktop": "Today's check-in",
-  "checkinDuration": "About 30 seconds",
-  "checkinOpen": "Today's check-in is open",
-  "checkinEdit": "Edit today's check-in",
-  "checkinSaved": "Saved for today. You can edit it later.",
-  "feelingChartTitle": "How you've been feeling",
-  "feelingChartLatest": "Latest: {mood} / {energy} / {stress}",
-  "@feelingChartLatest": {
-    "placeholders": { "mood": { "type": "String" }, "energy": { "type": "String" }, "stress": { "type": "String" } }
+  "outOf100": "{score} out of 100",
+  "@outOf100": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
   },
-  "feelingChartCaption": "{start}–{end} · scale 1–5 · lower stress is better",
-  "@feelingChartCaption": {
-    "placeholders": { "start": { "type": "String" }, "end": { "type": "String" } }
+  "outOf100Short": "out of 100",
+  "ratingOf5": "{value} / 5",
+  "@ratingOf5": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
   },
-  "feelingChartNote": "Energy varied this week. Your notes can help add the context a chart can't.",
-  "feelingChartNoteStable": "Your days looked steady this week.",
-  "restMovementTitle": "Rest & movement",
-  "sleepLabel": "Sleep",
-  "sleepUnit": "hours",
-  "activityLabel": "Activity",
-  "activityUnit": "minutes",
+  "mood": "Mood",
+  "energy": "Energy",
+  "stress": "Stress",
+  "wellbeingNote": "A reflection of mood, energy and stress. Not a medical measure or a grade.",
+  "wellbeingNoteDesktop": "A reflection, not a diagnosis. Your score combines mood, energy and stress.",
+  "wellbeingEmpty": "Your score appears after your first check-in.",
+  "checkinCta": "How are you today? Check in",
+  "checkinCtaDesktop": "Today’s check-in",
+  "checkinEditCta": "Edit today’s check-in",
+  "checkinOpenNote": "About 30 seconds · Today’s check-in is open",
+  "checkinDoneNote": "Saved for today · You can edit it anytime",
+  "feelingTitle": "How you’ve been feeling",
+  "feelingCaption": "{range} · scale 1–5 · lower stress is better",
+  "@feelingCaption": {
+    "placeholders": {
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "latestTriple": "Latest: {mood} / {energy} / {stress}",
+  "@latestTriple": {
+    "placeholders": {
+      "mood": {
+        "type": "String"
+      },
+      "energy": {
+        "type": "String"
+      },
+      "stress": {
+        "type": "String"
+      }
+    }
+  },
+  "energyVaried": "Energy varied this week. Your notes can help add the context a chart can’t.",
+  "restTitle": "Rest & movement",
+  "sleepHoursSeries": "Sleep · hours",
+  "activitySeries": "Activity · minutes",
+  "noDataYet": "Nothing logged in this range yet.",
   "oneSmallThing": "ONE SMALL THING",
-  "oneSmallThingDone": "You made a little room.",
-  "oneSmallThingPending": "Pending · {done} of {total} done",
-  "@oneSmallThingPending": {
-    "placeholders": { "done": { "type": "int" }, "total": { "type": "int" } }
+  "pendingProgress": "Pending · {done} of {total} done",
+  "@pendingProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
   },
-  "oneSmallThingRationale": "Try a quieter wind-down tonight. Treat it as an experiment, not a rule.",
-  "markDone": "Mark done",
+  "allDoneTitle": "That’s all three for today.",
+  "allDoneBody": "You made a little room today. Nothing more to do.",
   "done": "Done",
-  "skipToday": "Skip today",
+  "markDone": "Mark done",
   "skip": "Skip",
-  "seeAllSuggestions": "See today's 3 suggestions",
-  "seeAllSuggestionsShort": "All 3 suggestions",
-  "patternCardTitle": "A PATTERN TO EXPLORE · {count} CHECK-INS",
-  "@patternCardTitle": {
-    "placeholders": { "count": { "type": "int" } }
+  "skipToday": "Skip today",
+  "allSuggestions": "All 3 suggestions",
+  "seeTodaysSuggestions": "See today’s 3 suggestions",
+  "patternEyebrow": "A PATTERN TO EXPLORE · {count} CHECK-INS",
+  "@patternEyebrow": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
-  "patternCardTitleExample": "Short sleep + no breaks, lower energy.",
-  "patternCardTitleExampleMobile": "More movement, brighter mood?",
-  "patternCardBody": "Patterns aren't proof of cause. Other things may matter.",
-  "exploreInsights": "Explore your personal insights",
-  "almostThere": "Almost there",
-  "almostThereText": "Patterns begin after 7 check-ins. You have {count} so far.",
-  "@almostThereText": {
-    "placeholders": { "count": { "type": "int" } }
+  "exploreInsights": "Explore insights",
+  "exploreInsightsLong": "Explore your personal insights",
+  "patternsNotProof": "Patterns aren’t proof of cause.",
+  "patternsNotProofLong": "Patterns aren’t proof of cause. Other things may matter.",
+  "almostThereTitle": "Patterns are on their way.",
+  "almostThereBody": "{count} of 7 check-ins so far. Patterns begin after 7+ check-ins.",
+  "@almostThereBody": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "emptyTitle": "Your space is ready.",
+  "emptyBody": "Whenever you like, take a 30-second check-in. There’s no wrong answer.",
+  "sidebarQuoteTitle": "You’re a person, not a progress bar.",
+  "sidebarQuoteBody": "No streaks. No catching up. Just room to reflect.",
+  "journalOf": "{name}’s journal",
+  "@journalOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "myJournal": "My journal",
+  "cityLanguage": "{city} · English",
+  "@cityLanguage": {
+    "placeholders": {
+      "city": {
+        "type": "String"
+      }
+    }
   },
   "recentReflections": "Recent reflections",
   "viewJournal": "View journal",
-  "needSupport": "Need someone to talk to? Find support",
-
-  // Check-in screen
-  "checkinTitle": "How's your day, really?",
-  "checkinSubtitle": "A quick pause, just for you. Your best guess is enough.",
-  "checkinDate": "{weekday}, {date} · DAILY CHECK-IN",
-  "@checkinDate": {
-    "placeholders": { "weekday": { "type": "String" }, "date": { "type": "String" } }
+  "colCheckin": "Check-in",
+  "colSleep": "Sleep",
+  "colActive": "Active",
+  "colScore": "Score",
+  "hoursShort": "{value} h",
+  "@hoursShort": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
   },
+  "minutesShort": "{value} min",
+  "@minutesShort": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "findSupportLink": "Need someone to talk to? Find support",
+  "checkinEyebrow": "{date} · DAILY CHECK-IN",
+  "@checkinEyebrow": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "checkinTitle": "How’s your day, really?",
+  "checkinBody": "A quick pause, just for you. Your best guess is enough.",
+  "about30Seconds": "About 30 seconds",
   "demoDraft": "Demo draft · not submitted",
-  "lastNightRest": "Last night's rest",
+  "editingToday": "Editing today’s entry",
+  "restSection": "Last night’s rest",
   "sleepHours": "Sleep hours",
+  "sleepHelper": "0–12 hours · half-hour steps",
   "sleepQuality": "Sleep quality",
-  "sleepQualityLabel": "{value} / 5",
-  "@sleepQualityLabel": {
-    "placeholders": { "value": { "type": "int" } }
-  },
   "veryPoor": "Very poor",
   "veryGood": "Very good",
+  "veryLow": "Very low",
+  "veryHigh": "Very high",
   "innerWeather": "Your inner weather",
+  "feelingsNote": "All feelings belong here. Higher isn’t always better — for stress, lower means calmer.",
   "everydayThings": "The everyday things",
-  "waterGlasses": "Water",
-  "waterUnit": "glasses",
+  "water": "Water",
+  "glasses": "glasses",
   "waterHelper": "One glass is roughly 250 ml.",
-  "activityMinutes": "Activity",
+  "activity": "Activity",
+  "minutes": "minutes",
   "activityHelper": "Walking to class counts, too. Steps of 5 minutes.",
   "meals": "Meals",
+  "mealsUnit": "meals",
   "breaks": "Breaks",
+  "breaksUnit": "breaks",
   "breaksHelper": "Pauses away from work or study.",
   "screenTime": "Screen time",
-  "screenTimeUnit": "h",
-  "screenTimeHelper": "0–16 hours · half-hour steps",
+  "screenHelper": "0–16 hours · half-hour steps",
   "caffeine": "Caffeine",
+  "servings": "servings",
   "caffeineHelper": "Count a cup of coffee, tea or an energy drink.",
-  "caffeineUnit": "servings",
   "phoneAway": "Phone away 30 min before bed?",
-  "phoneAwayYes": "Yes",
-  "phoneAwayNo": "No",
-  "phoneAwaySkip": "Skip",
-  "anythingOnMind": "Anything on your mind?",
+  "yes": "Yes",
+  "no": "No",
+  "noteTitle": "Anything on your mind?",
   "optional": "Optional",
-  "notePlaceholder": "A busy lecture day. The walk after class gave me a bit of breathing room.",
-  "noteHelper": "Only for your journal. No real name needed.",
-  "saveCheckin": "Save today's check-in",
-  "saveCheckinEdit": "Update today's check-in",
-  "oneEntryToday": "One entry for today. You can edit it later.",
-  "patternsBegin": "Patterns begin after 7+ check-ins.",
-  "savedSnackbar": "Saved. Thanks for checking in.",
-  "demoSnackbar": "This is a demo, nothing is saved.",
-
-  // Check-in ranges
-  "veryLow": "Very low",
-  "low": "Low",
-  "medium": "Medium",
-  "high": "High",
-  "veryHigh": "Very high",
-
-  // Insights
-  "insightsTitle": "YOUR PATTERNS, NOT A PRESCRIPTION",
-  "insightsHeading": "Get to know your days.",
-  "insightsSubtitle": "{count} check-ins · {startDate}–{endDate}. Small clues, with room for context.",
-  "@insightsSubtitle": {
-    "placeholders": { "count": { "type": "int" }, "startDate": { "type": "String" }, "endDate": { "type": "String" } }
+  "noteHint": "A sentence or two about your day…",
+  "notePrivacy": "Only for your journal. No real name needed.",
+  "saveCheckin": "Save today’s check-in",
+  "updateCheckin": "Update today’s check-in",
+  "checkinFooter": "One entry for today. You can edit it later.\nPatterns begin after 7+ check-ins.",
+  "checkinSaved": "Saved. Thanks for taking a moment for yourself.",
+  "insightsEyebrow": "YOUR PATTERNS, NOT A PRESCRIPTION",
+  "insightsTitle": "Get to know your days.",
+  "insightsBody": "{count} check-ins · {range}. Small clues, with room for context.",
+  "@insightsBody": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "range": {
+        "type": "String"
+      }
+    }
   },
+  "insightsBodyEmpty": "Small clues, with room for context. They appear after 7+ check-ins.",
   "bestDaysTitle": "Your best days look like…",
-  "bestDaysText": "7+ hours of sleep. A little movement. A few real pauses between study sessions.",
-  "bestDaysDemo": "These habits show up alongside higher mood and energy in the demo. They're clues, not rules.",
+  "bestDaysSleep": "7+ hours of sleep.",
+  "bestDaysMovement": "A little movement.",
+  "bestDaysBreaks": "A few real pauses between study sessions.",
+  "bestDaysPhone": "A quieter evening without the phone.",
+  "bestDaysWater": "A few more glasses of water.",
+  "bestDaysNote": "These habits show up alongside higher mood and energy in your entries. They’re clues, not rules.",
   "confidenceModerate": "Moderate confidence",
   "confidenceEmerging": "Emerging · limited data",
-  "confidenceEarly": "Early clue",
-  "comparisonTitle1": "Short sleep + no breaks, lower energy.",
-  "comparisonBody1": "Energy is about 2 points lower on days with <6h sleep and skipped breaks, compared with 7+ hours and at least one break.",
-  "comparisonTitle2": "More movement, brighter mood?",
-  "comparisonBody2": "Mood is about 1.5 points higher on days with 30+ active minutes in your journal.",
-  "comparisonTitle3": "A quieter evening, a longer rest?",
-  "comparisonBody3": "On evenings with the phone away before bed, sleep is about 1 hour longer. There's less data here.",
-  "patternsNotProof": "Patterns aren't proof of cause.",
-  "patternsNotProofBody": "Other things can affect how you feel. Confidence reflects the amount and consistency of your entries, not medical certainty. These are small, self-reported comparisons.",
-  "trySuggestion": "Try one small suggestion",
-  "avgEnergy": "AVERAGE ENERGY · 1–5",
-  "avgMood": "AVERAGE MOOD · 1–5",
-  "avgSleep": "SLEEP · 0–10 HOURS",
-  "groupWithHabit": "{label} · {value}",
-  "@groupWithHabit": {
-    "placeholders": { "label": { "type": "String" }, "value": { "type": "String" } }
+  "confidenceHigher": "Higher confidence",
+  "insSleepTitle": "Short sleep + no breaks, lower energy.",
+  "insSleepBody": "Energy is about {diff} points lower on days with <6h sleep and skipped breaks, compared with 7+ hours and breaks.",
+  "@insSleepBody": {
+    "placeholders": {
+      "diff": {
+        "type": "String"
+      }
+    }
   },
-  "groupWithoutHabit": "{label} · {value}",
-  "@groupWithoutHabit": {
-    "placeholders": { "label": { "type": "String" }, "value": { "type": "String" } }
+  "insSleepAxis": "AVERAGE ENERGY · 1–5",
+  "insSleepA": "<6h sleep + no breaks",
+  "insSleepB": "7+ hours + at least one break",
+  "insMoveTitle": "More movement, brighter mood?",
+  "insMoveBody": "Mood is about {diff} points higher on days with 30+ active minutes in your journal.",
+  "@insMoveBody": {
+    "placeholders": {
+      "diff": {
+        "type": "String"
+      }
+    }
+  },
+  "insMoveAxis": "AVERAGE MOOD · 1–5",
+  "insMoveA": "Under 30 active minutes",
+  "insMoveB": "30+ active minutes",
+  "insPhoneTitle": "A quieter evening, a longer rest?",
+  "insPhoneBody": "On evenings with the phone away before bed, sleep is about {diff} h longer in your journal.",
+  "@insPhoneBody": {
+    "placeholders": {
+      "diff": {
+        "type": "String"
+      }
+    }
+  },
+  "insPhoneAxis": "AVERAGE SLEEP · 0–10 HOURS",
+  "insPhoneA": "Phone used near bedtime",
+  "insPhoneB": "Phone away 30 min before bed",
+  "insWaterTitle": "More water, steadier energy?",
+  "insWaterBody": "Energy is about {diff} points higher on days with 6+ glasses of water.",
+  "@insWaterBody": {
+    "placeholders": {
+      "diff": {
+        "type": "String"
+      }
+    }
+  },
+  "insWaterAxis": "AVERAGE ENERGY · 1–5",
+  "insWaterA": "Under 6 glasses",
+  "insWaterB": "6+ glasses",
+  "insReversed": "In your entries this goes the other way: {a} vs {b}. Worth noticing, not judging.",
+  "@insReversed": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
   },
   "daysCount": "{count} days",
   "@daysCount": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
-  "daysExcluded": "· {count} other days excluded",
-  "@daysExcluded": {
-    "placeholders": { "count": { "type": "int" } }
+  "demoDaysCount": "{count} demo days",
+  "@demoDaysCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
-  "daysFromNotes": "· from optional notes",
-
-  // For you
-  "forYouTitle": "FOR YOU · {date}",
-  "@forYouTitle": {
-    "placeholders": { "date": { "type": "String" } }
+  "nightsCount": "{count} nights",
+  "@nightsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
-  "forYouHeading": "Small steps. Your pace.",
-  "forYouSubtitle": "Three ideas for today, {nickname}. Try what fits and skip what doesn't.",
-  "@forYouSubtitle": {
-    "placeholders": { "nickname": { "type": "String" } }
+  "demoNightsCount": "{count} demo nights",
+  "@demoNightsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
-  "doneToday": "{done} of 3 done today",
-  "@doneToday": {
-    "placeholders": { "done": { "type": "int" } }
+  "otherDaysExcluded": "{count} other days excluded",
+  "@otherDaysExcluded": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
-  "notScore": "Not a score to chase",
-  "suggestion1Title": "Take a 10-minute walk after your 2pm lecture",
-  "suggestion1Rationale": "Your demo entries pair more movement with higher mood. A short walk is one way to explore that.",
-  "suggestion2Title": "Put your phone away 30 minutes before bed",
-  "suggestion2Rationale": "A small wind-down experiment, inspired by your evening notes. Notice how tomorrow feels.",
-  "suggestion3Title": "Take a 5-minute break every 50 minutes of study",
-  "suggestion3Rationale": "Stand up, stretch or look out the window. A pause doesn't have to be productive.",
-  "nourMadeRoom": "Nour made a little room.",
+  "confidenceExplainTitle": "Patterns aren’t proof of cause.",
+  "confidenceExplainBody": "Other things can affect how you feel. Confidence reflects the amount and consistency of your entries, not medical certainty. These are small, self-reported comparisons.",
+  "trySuggestion": "Try one small suggestion",
+  "insightsEmptyTitle": "Patterns are on their way.",
+  "insightsNoneTitle": "No clear patterns yet.",
+  "insightsNoneBody": "Your days look fairly even so far. Keep checking in and clues may appear.",
+  "forYouEyebrow": "FOR YOU · {date}",
+  "@forYouEyebrow": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "forYouTitle": "Small steps. Your pace.",
+  "forYouBody": "Three ideas for today, {name}. Try what fits and skip what doesn’t.",
+  "@forYouBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "forYouBodyNoName": "Three ideas for today. Try what fits and skip what doesn’t.",
+  "doneTodayCount": "{done} of {total} done today",
+  "@doneTodayCount": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "notAScore": "Not a score to chase",
+  "doneToday": "✓ Done today",
+  "pending": "Pending",
+  "skippedToday": "Skipped today",
+  "madeRoom": "You made a little room.",
+  "skippedNote": "Skipping is useful feedback, too.",
   "undo": "Undo",
-  "wasThisHelpful": "Was this helpful?",
-  "doesThisFit": "Does this fit your day?",
-  "suggestionsNotInstructions": "Suggestions, not instructions.",
-  "suggestionsNotInstructionsBody": "Skipping is useful feedback, too. These experiments don't promise a particular result.",
-
-  // Support
-  "supportTitle": "YOU DON'T HAVE TO DO THIS ALONE",
-  "supportHeading": "There's room for support.",
-  "supportSubtitle": "A difficult stretch doesn't have to be something you carry by yourself.",
-  "supportCardTitle": "It looks like the last stretch has been hard. Talking to someone can help.",
-  "supportCardBody": "This isn't a diagnosis. You can explore these options whenever you need them — no score or pattern required.",
-  "supportCardSoft": "Support is here whenever you want it.",
+  "wasHelpful": "Was this helpful?",
+  "fitsYourDay": "Does this fit your day?",
+  "helpful": "Helpful",
+  "notHelpful": "Not helpful",
+  "agencyTitle": "Suggestions, not instructions.",
+  "agencyBody": "Skipping is useful feedback, too. These experiments don’t promise a particular result.",
+  "editGoalsLink": "Change my goals",
+  "supportEyebrow": "YOU DON’T HAVE TO DO THIS ALONE",
+  "supportTitle": "There’s room for support.",
+  "supportBody": "A difficult stretch doesn’t have to be something you carry by yourself.",
+  "supportHardTitle": "It looks like the last stretch has been hard. Talking to someone can help.",
+  "supportGentleTitle": "Whenever things feel heavy, talking to someone can help.",
+  "supportInviteBody": "This isn’t a diagnosis. You can explore these options whenever you need them — no score or pattern required.",
   "universityTitle": "Start with your university",
-  "universityBody": "Ask Student Affairs or your university's counselling centre about a private appointment, availability and any fees.",
-  "universityQuote": "I've been finding things difficult lately. How can I book a counselling appointment?",
-  "copy": "Copy",
-  "findUniversity": "Find my university's official site",
+  "universityBody": "Ask Student Affairs or your university’s counselling centre about a private appointment, availability and any fees.",
+  "universityStarter": "“I’ve been finding things difficult lately. How can I book a counselling appointment?”",
+  "universityAction": "Find my university’s official site",
   "egyptTitle": "Find support in Egypt",
-  "egyptBody": "Start with the Egyptian Ministry of Health and Population's official website. Look for the General Secretariat of Mental Health and Addiction Treatment and its current services.",
-  "findMinistry": "Find official Ministry resources",
+  "egyptBody": "Start with the Egyptian Ministry of Health and Population’s official website. Look for the General Secretariat of Mental Health and Addiction Treatment and its current services.",
+  "egyptAction": "Find official Ministry resources",
   "egyptNote": "Check contact details, opening hours and eligibility on the official source before reaching out. No phone numbers are listed here.",
-  "helpRightNow": "If you need help right now",
-  "helpRightNowBody": "If you may hurt yourself or someone else, or you're in immediate danger, contact local emergency services or go to the nearest emergency department. If possible, ask someone you trust to stay with you.",
-  "helpRightNowNote": "DayWise isn't an emergency service. Your journal is not monitored for urgent help.",
-
-  // Journal
-  "journalTitle": "Journal",
-  "journalEmpty": "No check-ins yet. Start by checking in today.",
-  "deleteEntry": "Delete this entry",
-  "deleteEntryConfirm": "Are you sure you want to delete this entry? This can't be undone.",
-  "cancel": "Cancel",
-  "delete": "Delete",
-
-  // Account
+  "urgentTitle": "If you need help right now",
+  "urgentBody": "If you may hurt yourself or someone else, or you’re in immediate danger, contact local emergency services or go to the nearest emergency department. If possible, ask someone you trust to stay with you.",
+  "urgentNote": "DayWise isn’t an emergency service. Your journal is not monitored for urgent help.",
+  "linkFailed": "Couldn’t open the link.",
+  "copyStarter": "Copy",
+  "copied": "Copied",
   "accountTitle": "Account & data",
+  "accountData": "ACCOUNT & DATA",
+  "nicknameLine": "Nickname: {name}",
+  "@nicknameLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "edit": "Edit",
+  "privateByDefault": "Private by default. No real name required.",
   "editNickname": "Edit nickname",
   "editGoals": "Edit goals",
-  "language": "Language",
-  "dailyReminder": "Daily reminder",
   "exportEntries": "Export my entries",
+  "exportReady": "Your entries are ready to copy.",
   "deleteData": "Delete my data",
-  "deleteDataConfirm": "This removes your journal from DayWise. It can't be undone. Type DELETE to confirm.",
-  "deleteDataConfirmTyped": "Type DELETE to confirm",
-  "signOut": "Sign out",
-  "signOutConfirm": "Are you sure you want to sign out?",
-  "nicknameMaxChars": "Max 20 characters",
-  "nicknameSaved": "Nickname saved",
-  "dataExported": "Your entries have been exported.",
+  "deleteConfirmTitle": "Delete all your data?",
+  "deleteConfirmBody": "This permanently removes your check-ins, suggestion history and profile. It can’t be undone.",
+  "deleteConfirm": "Delete everything",
   "dataDeleted": "Your data has been deleted.",
-  "requiresRecentLogin": "For your security, please sign in again to continue.",
-
-  // Demo
-  "demoBanner": "Nour's illustrative demo · not real health data",
-  "exploreDemo": "Explore Nour's demo",
-  "exitDemo": "Exit demo",
-
-  // Landing page
-  "landingHeroPill": "A little reflection. A little more you.",
-  "landingHeroH1_1": "Small habits.",
-  "landingHeroH1_2": "Your patterns.",
-  "landingHeroH1_3": "Better days.",
-  "landingHeroBody": "Your days are full. Make a little room for yourself. A 30-second check-in helps you notice what supports your well-being, one small step at a time.",
-  "landingStartFree": "Start free",
-  "landingExploreDemo": "Explore Nour's demo",
-  "landingFreeNote": "Free for individuals · عربي / English · No wearable needed",
-  "landingHeroCaption": "You don't have to change everything.",
-  "landingHeroCaptionSub": "Just find one thing that fits today.",
-  "landingSandEyebrow": "FOR THE DAYS THAT FEEL LIKE A LOT",
-  "landingSandH2": "Busy days can blur the bigger picture.",
-  "landingSandBody": "Lectures, commutes, deadlines, late-night scrolling. It can be hard to notice how sleep, movement and everyday routines sit alongside how you feel.",
-  "landingSandBullet": "Not another routine to perfect. A way to understand yours.",
-  "landingHowEyebrow": "A SMALL LOOP, BUILT AROUND YOU",
-  "landingHowH2": "Check in. Notice. Try one thing.",
-  "landingHowNote": "No wearable, medical record or perfect week required. Your phone is enough.",
-  "landingHow1Title": "Start with how you are.",
-  "landingHow1Body": "About 30 seconds to log your sleep, mood, energy and everyday habits. No right answers.",
-  "landingHow1Tag": "One daily check-in",
-  "landingHow2Title": "See your own patterns.",
-  "landingHow2Body": "After 7+ check-ins, explore simple connections in your days. Not a diagnosis. Not a prediction.",
-  "landingHow2Tag": "Your patterns, in plain language",
-  "landingHow3Title": "Make room for a small step.",
-  "landingHow3Body": "Try one realistic experiment that fits your schedule. Keep what feels helpful; skip what doesn't.",
-  "landingHow3Tag": "One small action",
-  "landingSageEyebrow": "LESS GUESSWORK. MORE SELF-KNOWLEDGE.",
-  "landingSageH2": "Your days, with a little perspective.",
-  "landingSageBody1": "A gentle overview, not a grade. Follow mood, energy, stress, sleep and movement together — and see what's worth exploring.",
-  "landingSageBody2": "Patterns begin after 7+ check-ins. More entries can add context, but missing a day is always okay.",
-  "landingMeetDemo": "Meet Nour in the demo",
-  "landingCreamEyebrow": "SMALL ENOUGH FOR REAL LIFE",
-  "landingCreamH2": "A nudge, not another to-do list.",
-  "landingCreamBody": "Three suggestions. Your choice. Tell DayWise what fits and leave the rest.",
-  "landingSmallTitle1": "A little movement",
-  "landingSmallBody1": "Take a 10-minute walk after your 2pm lecture",
-  "landingSmallTitle2": "A softer evening",
-  "landingSmallBody2": "Put your phone away 30 minutes before bed",
-  "landingSmallTitle3": "A pause that fits",
-  "landingSmallBody3": "Take a 5-minute break every 50 minutes of study",
-  "landingEgyptArabic": "يومك يستاهل لحظة ليك.",
-  "landingEgyptH2": "Made for life between lectures, work and everything else.",
-  "landingEgyptBody": "Built for students and young workers, ages 18–30. Use DayWise in Arabic or English, with familiar everyday suggestions and a fully right-to-left Arabic experience.",
-  "landingForestEyebrow": "A PRIVATE SPACE, NOT A PERFORMANCE",
-  "landingForestH2": "Your life is personal. Your journal should be, too.",
-  "landingForestBody": "DayWise supports healthy habits; it does not give medical advice. We don't diagnose, and a score can never tell the whole story. When you need more support, we help you find a human next step.",
-  "landingForest1Title": "Private by default",
-  "landingForest1Body": "No real name required. Reflect without turning your day into a public feed.",
-  "landingForest2Title": "You stay in control",
-  "landingForest2Body": "Export your entries or delete your data from your account. Your journal, your decision.",
-  "landingForest3Title": "Care beyond the app",
-  "landingForest3Body": "Find university counselling and official Egyptian mental-health resources, without a diagnosis.",
-  "landingFaqEyebrow": "A FEW GOOD QUESTIONS",
-  "landingFaqH2": "A little clarity, before you begin.",
-  "landingFaqLink": "Explore support",
-  "landingFaq1Q": "Is DayWise a medical or therapy service?",
-  "landingFaq1A": "No. DayWise is an everyday well-being journal. It supports healthy habits, not diagnosis, treatment or medical decisions.",
-  "landingFaq2Q": "When will I see my personal patterns?",
-  "landingFaq2A": "After at least 7 check-ins. Patterns are personal associations, not proof that one habit caused a change. More data adds context.",
-  "landingFaq3Q": "What if I miss a day?",
-  "landingFaq3A": "Come back whenever you like. There are no streaks to protect, no penalties and no perfect week to chase.",
-  "landingFaq4Q": "Do I need a wearable or a paid plan?",
-  "landingFaq4A": "No. DayWise is phone-only and free for individuals. No wearable or medical records needed.",
-  "landingFaq5Q": "Can I use it in Arabic?",
-  "landingFaq5A": "Yes. Arabic and English are available throughout, with a mirrored right-to-left layout in Arabic.",
-  "landingClosingH2": "Start with today. The rest can wait.",
-  "landingClosingBody": "A small check-in is a kind place to begin. No perfect routine required.",
-  "landingFooterLink1": "Privacy",
-  "landingFooterLink2": "Support",
-  "landingFooterLink3": "Account & data",
-  "landingFooterText1": "Designed to support SDG 3: Good Health and Well-being, especially Target 3.4. An independent project. No United Nations affiliation or endorsement.",
-  "landingFooterText2": "DayWise supports healthy habits; it does not give medical advice. DayWise · Made with room to breathe.",
-
-  // Common
-  "save": "Save",
-  "close": "Close",
-  "ok": "OK",
-  "yes": "Yes",
-  "no": "No",
-  "back": "Back",
-  "next": "Next",
-  "done": "Done",
-  "loading": "Loading...",
-  "error": "Something went wrong",
-  "retry": "Try again"
+  "signOut": "Sign out",
+  "leaveDemo": "Leave the demo",
+  "demoCta": "Like what you see? Create your own private journal.",
+  "goalsSaved": "Goals updated.",
+  "lpNavHow": "How it works",
+  "lpNavMade": "Made for your day",
+  "lpNavPrivacy": "Privacy",
+  "lpExploreDemo": "Explore demo",
+  "lpStartDay": "Start your day",
+  "lpHeroBadge": "A little reflection. A little more you.",
+  "lpHeroTitle": "Small habits.\nYour patterns.\nBetter days.",
+  "lpHeroBody": "Your days are full. Make a little room for yourself. A 30-second check-in helps you notice what supports your well-being, one small step at a time.",
+  "lpStartFree": "Start free",
+  "lpExploreNour": "Explore Nour’s demo",
+  "lpHeroMeta": "Free for individuals · عربي / English · No wearable needed",
+  "lpHeroNoteTitle": "You don’t have to change everything.",
+  "lpHeroNoteBody": "Just find one thing that fits today.",
+  "lpBusyEyebrow": "FOR THE DAYS THAT FEEL LIKE A LOT",
+  "lpBusyTitle": "Busy days can blur the bigger picture.",
+  "lpBusyBody": "Lectures, commutes, deadlines, late-night scrolling. It can be hard to notice how sleep, movement and everyday routines sit alongside how you feel.",
+  "lpBusyPoint": "Not another routine to perfect. A way to understand yours.",
+  "lpLoopEyebrow": "A SMALL LOOP, BUILT AROUND YOU",
+  "lpLoopTitle": "Check in. Notice. Try one thing.",
+  "lpLoopNote": "No wearable, medical record or perfect week required. Your phone is enough.",
+  "lpStep1Title": "Start with how you are.",
+  "lpStep1Body": "About 30 seconds to log your sleep, mood, energy and everyday habits. No right answers.",
+  "lpStep1Tag": "One daily check-in",
+  "lpStep2Title": "See your own patterns.",
+  "lpStep2Body": "After 7+ check-ins, explore simple connections in your days. Not a diagnosis. Not a prediction.",
+  "lpStep2Tag": "Your patterns, in plain language",
+  "lpStep3Title": "Make room for a small step.",
+  "lpStep3Body": "Try one realistic experiment that fits your schedule. Keep what feels helpful; skip what doesn’t.",
+  "lpStep3Tag": "One small action",
+  "lpPerspEyebrow": "LESS GUESSWORK. MORE SELF-KNOWLEDGE.",
+  "lpPerspTitle": "Your days, with a little perspective.",
+  "lpPerspBody": "A gentle overview, not a grade. Follow mood, energy, stress, sleep and movement together — and see what’s worth exploring.",
+  "lpPerspNote": "Patterns begin after 7+ check-ins. More entries can add context, but missing a day is always okay.",
+  "lpMeetNour": "Meet Nour in the demo",
+  "lpDemoCardTitle": "A little clearer, Nour.",
+  "lpIllustrativeDemo": "Illustrative demo",
+  "lpWellbeingLine": "Well-being · {score} / 100",
+  "@lpWellbeingLine": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "lpLatestCheckin": "Latest check-in · {date}",
+  "@lpLatestCheckin": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "lpSnapshot": "A snapshot of how you felt, not a medical measure.",
+  "lpLast7": "Your last 7 days",
+  "lpDemoInsightBody": "In this demo, mood is about 1.5 points higher on days with 30+ active minutes. A pattern, not proof.",
+  "lpNudgeEyebrow": "SMALL ENOUGH FOR REAL LIFE",
+  "lpNudgeTitle": "A nudge, not another to-do list.",
+  "lpNudgeNote": "Three suggestions. Your choice. Tell DayWise what fits and leave the rest.",
+  "lpNudge1": "A little movement",
+  "lpNudge2": "A softer evening",
+  "lpNudge3": "A pause that fits",
+  "lpNudgeTry": "Try it. Adapt it. Or skip it.",
+  "lpEgyptEyebrow": "EGYPT FIRST. YOUR LANGUAGE, TOO.",
+  "lpEgyptArabic": "يومك يستاهل لحظة ليك.",
+  "lpEgyptTitle": "Made for life between lectures, work and everything else.",
+  "lpEgyptBody": "Built for students and young workers, ages 18–30. Use DayWise in Arabic or English, with familiar everyday suggestions and a fully right-to-left Arabic experience.",
+  "lpArabicFirst": "عربي أولًا",
+  "lpPhoneOnly": "Phone-only · No extra devices",
+  "lpPrivEyebrow": "A PRIVATE SPACE, NOT A PERFORMANCE",
+  "lpPrivTitle": "Your life is personal. Your journal should be, too.",
+  "lpPrivBody": "DayWise supports healthy habits; it does not give medical advice. We don’t diagnose, and a score can never tell the whole story. When you need more support, we help you find a human next step.",
+  "lpPriv1Title": "Private by default",
+  "lpPriv1Body": "No real name required. Reflect without turning your day into a public feed.",
+  "lpPriv2Title": "You stay in control",
+  "lpPriv2Body": "Export your entries or delete your data from your account. Your journal, your decision.",
+  "lpPriv3Title": "Care beyond the app",
+  "lpPriv3Body": "Find university counselling and official Egyptian mental-health resources, without a diagnosis.",
+  "lpFaqEyebrow": "A FEW GOOD QUESTIONS",
+  "lpFaqTitle": "A little clarity, before you begin.",
+  "lpExploreSupport": "Explore support",
+  "lpQ1": "Is DayWise a medical or therapy service?",
+  "lpA1": "No. DayWise is an everyday well-being journal. It supports healthy habits, not diagnosis, treatment or medical decisions.",
+  "lpQ2": "When will I see my personal patterns?",
+  "lpA2": "After at least 7 check-ins. Patterns are personal associations, not proof that one habit caused a change. More data adds context.",
+  "lpQ3": "What if I miss a day?",
+  "lpA3": "Come back whenever you like. There are no streaks to protect, no penalties and no perfect week to chase.",
+  "lpQ4": "Do I need a wearable or a paid plan?",
+  "lpA4": "No. DayWise is phone-only and free for individuals. No wearable or medical records needed.",
+  "lpQ5": "Can I use it in Arabic?",
+  "lpA5": "Yes. Arabic and English are available throughout, with a mirrored right-to-left layout in Arabic.",
+  "lpCtaTitle": "Start with today. The rest can wait.",
+  "lpCtaBody": "A small check-in is a kind place to begin. No perfect routine required.",
+  "lpExploreTheDemo": "Explore the demo",
+  "lpFooterSupport": "Support",
+  "lpFooterAccount": "Account & data",
+  "lpFooterSdg": "Designed to support SDG 3: Good Health and Well-being, especially Target 3.4.\nAn independent project. No United Nations affiliation or endorsement.",
+  "lpFooterCopy": "© 2026 DayWise · Made with room to breathe."
 }

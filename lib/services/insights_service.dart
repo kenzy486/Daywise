@@ -1,95 +1,110 @@
 import '../models/checkin.dart';
 
-// The habits and the feelings we compare
-enum Habit { sleep, water, exercise, breaks, phoneAway }
-enum Metric { energy, mood, stress }
+/// The comparisons DayWise looks for (mirrors the Personal insights design).
+enum InsightKind { sleepBreaksEnergy, movementMood, phoneAwaySleep, waterEnergy }
 
-// One comparison, e.g. "sleep 7+ vs under 7, looking at energy"
+enum Confidence { emerging, moderate, higher }
+
+/// One comparison: the "less helpful" group A vs the "habit" group B.
 class Insight {
-  final Habit habit;
-  final Metric metric;
-  final double avgWith;    // average on days the habit WAS met
-  final double avgWithout; // average on days it was NOT met
-  final int daysWith;
-  final int daysWithout;
-
+  final InsightKind kind;
+  final double avgA;
+  final double avgB;
+  final int daysA;
+  final int daysB;
+  final int excluded;
   const Insight({
-    required this.habit,
-    required this.metric,
-    required this.avgWith,
-    required this.avgWithout,
-    required this.daysWith,
-    required this.daysWithout,
+    required this.kind,
+    required this.avgA,
+    required this.avgB,
+    required this.daysA,
+    required this.daysB,
+    required this.excluded,
   });
 
-  // Positive = feeling is higher with the habit; negative = lower
-  double get difference => avgWith - avgWithout;
+  /// Positive = the habit group B looks better.
+  double get difference => avgB - avgA;
+
+  /// Upper bound of the chart scale (5 for ratings, 10 hours for sleep).
+  double get scaleMax => kind == InsightKind.phoneAwaySleep ? 10 : 5;
+
+  Confidence get confidence {
+    final smaller = daysA < daysB ? daysA : daysB;
+    if (smaller >= 10) return Confidence.higher;
+    if (smaller >= 4) return Confidence.moderate;
+    return Confidence.emerging;
+  }
 }
 
 class InsightsService {
-  static const minCheckins = 7;     // needed before showing insights
-  static const minDaysPerGroup = 2; // each group needs at least this many days
-  static const minDifference = 0.2; // smaller differences are ignored
+  static const minCheckins = 7; // "Patterns begin after 7+ check-ins"
+  static const minDaysPerGroup = 2;
+  static const minDifference = 0.4;
 
-  // Did this day meet the habit?
-  static bool meetsHabit(CheckIn c, Habit habit) => switch (habit) {
-        Habit.sleep => c.sleepHours >= 7,
-        Habit.water => c.waterGlasses >= 6,
-        Habit.exercise => c.exerciseMinutes >= 30,
-        Habit.breaks => c.breaks >= 1,
-        Habit.phoneAway => c.phoneAwayBeforeBed == true,
-      };
+  /// Returns null when a day doesn't belong to either group.
+  static bool? _inB(InsightKind k, CheckIn c) => switch (k) {
+    InsightKind.sleepBreaksEnergy =>
+      c.sleepHours < 6 && c.breaks == 0 ? false : (c.sleepHours >= 7 && c.breaks >= 1 ? true : null),
+    InsightKind.movementMood => c.exerciseMinutes >= 30,
+    InsightKind.phoneAwaySleep => c.phoneAwayBeforeBed,
+    InsightKind.waterEnergy => c.waterGlasses >= 6,
+  };
 
-  // Read energy, mood, or stress from a check-in
-  static double valueOf(CheckIn c, Metric metric) => switch (metric) {
-        Metric.energy => c.energy.toDouble(),
-        Metric.mood => c.mood.toDouble(),
-        Metric.stress => c.stress.toDouble(),
-      };
+  static double _value(InsightKind k, CheckIn c) => switch (k) {
+    InsightKind.sleepBreaksEnergy => c.energy.toDouble(),
+    InsightKind.movementMood => c.mood.toDouble(),
+    InsightKind.phoneAwaySleep => c.sleepHours,
+    InsightKind.waterEnergy => c.energy.toDouble(),
+  };
 
-  // All valid comparisons, biggest difference first
-  static List<Insight> allInsights(List<CheckIn> checkins) {
-    final results = <Insight>[];
-
-    for (final habit in Habit.values) {
-      // Skip phoneAway if no data
-      if (habit == Habit.phoneAway && !checkins.any((c) => c.phoneAwayBeforeBed != null)) {
-        continue;
-      }
-
-      // Split the days into two groups
-      final withHabit = checkins.where((c) => meetsHabit(c, habit)).toList();
-      final withoutHabit = checkins.where((c) => !meetsHabit(c, habit)).toList();
-
-      // Not enough days in one of the groups -> skip this habit (not fair)
-      if (withHabit.length < minDaysPerGroup || withoutHabit.length < minDaysPerGroup) {
-        continue;
-      }
-
-      for (final metric in Metric.values) {
-        results.add(Insight(
-          habit: habit,
-          metric: metric,
-          avgWith: _average(withHabit, metric),
-          avgWithout: _average(withoutHabit, metric),
-          daysWith: withHabit.length,
-          daysWithout: withoutHabit.length,
-        ));
-      }
+  static Insight? compute(InsightKind k, List<CheckIn> checkins) {
+    final a = <CheckIn>[], b = <CheckIn>[];
+    for (final c in checkins) {
+      final g = _inB(k, c);
+      if (g == true) b.add(c);
+      if (g == false) a.add(c);
     }
-
-    // Biggest difference first (ignore + or -, so we use .abs())
-    results.sort((a, b) => b.difference.abs().compareTo(a.difference.abs()));
-    return results;
+    if (a.length < minDaysPerGroup || b.length < minDaysPerGroup) return null;
+    double avg(List<CheckIn> l) => l.map((c) => _value(k, c)).reduce((x, y) => x + y) / l.length;
+    return Insight(
+      kind: k,
+      avgA: avg(a),
+      avgB: avg(b),
+      daysA: a.length,
+      daysB: b.length,
+      excluded: checkins.length - a.length - b.length,
+    );
   }
 
-  // The top [count] insights that are big enough to mention
-  static List<Insight> topInsights(List<CheckIn> checkins, {int count = 3}) =>
-      allInsights(checkins)
-          .where((i) => i.difference.abs() >= minDifference)
-          .take(count)
-          .toList();
+  /// Comparisons worth showing, biggest first. Empty until 7 check-ins.
+  static List<Insight> insights(List<CheckIn> checkins) {
+    if (checkins.length < minCheckins) return [];
+    final list = [
+      for (final k in InsightKind.values) compute(k, checkins),
+    ].whereType<Insight>().where((i) => i.difference.abs() >= minDifference).toList();
+    // Keep the design's order for the main three, then anything else.
+    list.sort((x, y) => x.kind.index.compareTo(y.kind.index));
+    return list;
+  }
 
-  static double _average(List<CheckIn> list, Metric metric) =>
-      list.map((c) => valueOf(c, metric)).reduce((a, b) => a + b) / list.length;
+  /// Habits that show up on better days (for "Your best days look like…").
+  static List<InsightKind> bestDayHabits(List<CheckIn> checkins) => [
+    for (final i in insights(checkins))
+      if (i.difference > 0) i.kind,
+  ];
+
+  /// The insight to preview on Today: largest relative effect.
+  static Insight? top(List<CheckIn> checkins) {
+    final list = insights(checkins).where((i) => i.difference > 0).toList();
+    if (list.isEmpty) return null;
+    list.sort((x, y) => (y.difference / y.scaleMax).compareTo(x.difference / x.scaleMax));
+    return list.first;
+  }
+
+  /// True when the last week looks hard (low mood or high stress on most days).
+  static bool hardStretch(List<CheckIn> lastWeek) {
+    if (lastWeek.length < 3) return false;
+    final hard = lastWeek.where((c) => c.mood <= 2 || c.stress >= 5).length;
+    return hard >= (lastWeek.length / 2).ceil();
+  }
 }
