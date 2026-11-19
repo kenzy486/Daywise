@@ -1,265 +1,97 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'app_colors.dart';
 
+/// Typography and shapes from the DayWise Figma file.
+/// English: Lora (serif headings) + Inter (UI text).
+/// Arabic: IBM Plex Sans Arabic for both.
 class AppTheme {
-  // Typography
-  static const double cardRadius = 24;
-  static const double innerRadius = 16;
-  static const double inputRadius = 18;
+  static const double cardRadius = 20;
+  static const double tileRadius = 12;
 
-  // English fonts
-  static final textThemeEn = GoogleFonts.interTextTheme().copyWith(
-    displayLarge: GoogleFonts.newsreader(
-      fontSize: 56,
-      fontWeight: FontWeight.w400,
-      height: 1.1,
-      color: AppColors.ink,
-    ),
-    displayMedium: GoogleFonts.newsreader(
-      fontSize: 40,
-      fontWeight: FontWeight.w400,
-      height: 1.1,
-      color: AppColors.ink,
-    ),
-    displaySmall: GoogleFonts.newsreader(
-      fontSize: 28,
-      fontWeight: FontWeight.w400,
-      height: 1.1,
-      color: AppColors.ink,
-    ),
-    headlineMedium: GoogleFonts.newsreader(
-      fontSize: 24,
-      fontWeight: FontWeight.w400,
-      height: 1.2,
-      color: AppColors.ink,
-    ),
-    titleLarge: GoogleFonts.inter(
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: AppColors.ink,
-    ),
-    titleMedium: GoogleFonts.inter(
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      color: AppColors.ink,
-    ),
-    bodyLarge: GoogleFonts.inter(
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      color: AppColors.body,
-    ),
-    bodyMedium: GoogleFonts.inter(
-      fontSize: 15,
-      fontWeight: FontWeight.w400,
-      color: AppColors.body,
-    ),
-    bodySmall: GoogleFonts.inter(
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: AppColors.muted,
-    ),
-    labelLarge: GoogleFonts.inter(
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: AppColors.ink,
-    ),
-    labelMedium: GoogleFonts.inter(
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      color: AppColors.ink,
-    ),
-    labelSmall: GoogleFonts.inter(
-      fontSize: 12,
-      fontWeight: FontWeight.w600,
-      letterSpacing: 0.8,
-      color: AppColors.primary,
-    ),
-  );
+  static bool isArabic(BuildContext context) => Localizations.localeOf(context).languageCode == 'ar';
 
-  // Arabic fonts
-  static final textThemeAr = GoogleFonts.ibmPlexSansArabicTextTheme().copyWith(
-    displayLarge: GoogleFonts.notoNaskhArabic(
-      fontSize: 56,
-      fontWeight: FontWeight.w400,
-      height: 1.1,
-      color: AppColors.ink,
-    ),
-    displayMedium: GoogleFonts.notoNaskhArabic(
-      fontSize: 40,
-      fontWeight: FontWeight.w400,
-      height: 1.1,
-      color: AppColors.ink,
-    ),
-    displaySmall: GoogleFonts.notoNaskhArabic(
-      fontSize: 28,
-      fontWeight: FontWeight.w400,
-      height: 1.1,
-      color: AppColors.ink,
-    ),
-    headlineMedium: GoogleFonts.notoNaskhArabic(
-      fontSize: 24,
-      fontWeight: FontWeight.w400,
-      height: 1.2,
-      color: AppColors.ink,
-    ),
-    titleLarge: GoogleFonts.ibmPlexSansArabic(
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: AppColors.ink,
-    ),
-    titleMedium: GoogleFonts.ibmPlexSansArabic(
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      color: AppColors.ink,
-    ),
-    bodyLarge: GoogleFonts.ibmPlexSansArabic(
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      color: AppColors.body,
-    ),
-    bodyMedium: GoogleFonts.ibmPlexSansArabic(
-      fontSize: 15,
-      fontWeight: FontWeight.w400,
-      color: AppColors.body,
-    ),
-    bodySmall: GoogleFonts.ibmPlexSansArabic(
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: AppColors.muted,
-    ),
-    labelLarge: GoogleFonts.ibmPlexSansArabic(
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: AppColors.ink,
-    ),
-    labelMedium: GoogleFonts.ibmPlexSansArabic(
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      color: AppColors.ink,
-    ),
-    labelSmall: GoogleFonts.ibmPlexSansArabic(
-      fontSize: 12,
-      fontWeight: FontWeight.w600,
-      letterSpacing: 0.8,
-      color: AppColors.primary,
-    ),
-  );
+  /// Serif display font (Lora) — Arabic falls back to IBM Plex Sans Arabic.
+  static TextStyle serif(
+    BuildContext context, {
+    double size = 23,
+    Color color = AppColors.ink,
+    double height = 1.25,
+  }) {
+    if (isArabic(context)) {
+      return GoogleFonts.ibmPlexSansArabic(
+        fontSize: size,
+        color: color,
+        height: height + 0.1,
+        fontWeight: FontWeight.w400,
+      );
+    }
+    return GoogleFonts.lora(fontSize: size, color: color, height: height, fontWeight: FontWeight.w400);
+  }
 
-  static ThemeData get light {
-    final base = ThemeData(
+  /// Sans UI font (Inter / IBM Plex Sans Arabic).
+  static TextStyle sans(
+    BuildContext context, {
+    double size = 13,
+    Color color = AppColors.body,
+    FontWeight weight = FontWeight.w400,
+    double? height,
+    double? letterSpacing,
+  }) {
+    final ar = isArabic(context);
+    // Arabic glyphs read smaller, so nudge them up one point.
+    final s = ar ? size + 1 : size;
+    final w = ar && weight == FontWeight.w600 ? FontWeight.w700 : weight;
+    final base = ar ? GoogleFonts.ibmPlexSansArabic() : GoogleFonts.inter();
+    return base.copyWith(
+      fontSize: s,
+      color: color,
+      fontWeight: w,
+      height: height,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static ThemeData ofLocale(Locale locale) {
+    final ar = locale.languageCode == 'ar';
+    final textTheme = ar ? GoogleFonts.ibmPlexSansArabicTextTheme() : GoogleFonts.interTextTheme();
+    return ThemeData(
       useMaterial3: true,
       scaffoldBackgroundColor: AppColors.bg,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primary,
         primary: AppColors.primary,
-        surface: AppColors.surface,
+        surface: AppColors.bg,
+        onSurface: AppColors.ink,
       ),
-    );
-
-    return base.copyWith(
-      textTheme: textThemeEn,
-      // Will be overridden by locale-specific theme in the app
-      appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.bg,
-        surfaceTintColor: Colors.transparent,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        centerTitle: false,
-      ),
-      cardTheme: CardTheme(
-        color: AppColors.surface,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(cardRadius),
-          side: const BorderSide(color: AppColors.border, width: 1),
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          foregroundColor: Colors.white,
-          disabledBackgroundColor: AppColors.muted.withValues(alpha: 0.3),
-          disabledForegroundColor: Colors.white,
-          elevation: 0,
-          minimumSize: const Size.fromHeight(56),
-          shape: const StadiumBorder(),
-          textStyle: GoogleFonts.inter(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          backgroundColor: AppColors.surface,
-          foregroundColor: AppColors.primary,
-          disabledBackgroundColor: AppColors.bg,
-          disabledForegroundColor: AppColors.muted,
-          elevation: 0,
-          minimumSize: const Size.fromHeight(56),
-          side: const BorderSide(color: AppColors.border, width: 1),
-          shape: const StadiumBorder(),
-          textStyle: GoogleFonts.inter(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: AppColors.primary,
-          textStyle: GoogleFonts.inter(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        filled: true,
-        fillColor: AppColors.surface,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(inputRadius),
-          borderSide: const BorderSide(color: AppColors.border),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(inputRadius),
-          borderSide: const BorderSide(color: AppColors.border),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(inputRadius),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(inputRadius),
-          borderSide: const BorderSide(color: AppColors.danger),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(inputRadius),
-          borderSide: const BorderSide(color: AppColors.danger, width: 2),
-        ),
-      ),
-      dividerTheme: const DividerThemeData(
-        color: AppColors.border,
-        thickness: 1,
-        space: 1,
+      textTheme: textTheme.apply(bodyColor: AppColors.ink, displayColor: AppColors.ink),
+      splashFactory: InkSparkle.splashFactory,
+      snackBarTheme: const SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: AppColors.ink,
       ),
       sliderTheme: SliderThemeData(
         activeTrackColor: AppColors.primary,
-        inactiveTrackColor: AppColors.sage,
-        thumbColor: AppColors.primary,
-        overlayColor: AppColors.primary.withValues(alpha: 0.1),
-        trackHeight: 4,
-        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10),
+        inactiveTrackColor: AppColors.border,
+        thumbColor: AppColors.surface,
+        trackHeight: 6,
+        overlayColor: Color(0x22246653),
+        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 11, elevation: 1),
+        showValueIndicator: ShowValueIndicator.never,
+        tickMarkShape: SliderTickMarkShape.noTickMark,
+      ),
+      checkboxTheme: CheckboxThemeData(
+        side: const BorderSide(color: AppColors.primary, width: 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        fillColor: WidgetStateProperty.resolveWith(
+          (s) => s.contains(WidgetState.selected) ? AppColors.primary : Colors.transparent,
+        ),
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: AppColors.bg,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(cardRadius)),
       ),
     );
-  }
-
-  static ThemeData ofLocale(Locale locale) {
-    if (locale.languageCode == 'ar') {
-      return light.copyWith(textTheme: textThemeAr);
-    }
-    return light.copyWith(textTheme: textThemeEn);
   }
 }

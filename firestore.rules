@@ -38,7 +38,7 @@ service cloud.firestore {
     }
 
     // User profile data (nickname, goals, etc.)
-    match /users/{userId}/profile {
+    match /users/{userId}/profile/{doc} {
       function isOwner() {
         return request.auth != null && request.auth.uid == userId;
       }
