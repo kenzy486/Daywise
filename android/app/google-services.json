@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "413190928567",
+    "project_id": "daywise-30c63",
+    "storage_bucket": "daywise-30c63.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413190928567:android:79ec166aed053d290fb532",
+        "android_client_info": {
+          "package_name": "com.daywise.daywise"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfjmMgVFshCI0qrsekQPZVsVfVouzeFPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

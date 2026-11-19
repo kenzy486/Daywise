@@ -1,0 +1,37 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "daywise-30c63",
+          "appId": "1:413190928567:android:79ec166aed053d290fb532",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "daywise-30c63",
+          "configurations": {
+            "android": "1:413190928567:android:79ec166aed053d290fb532",
+            "ios": "1:413190928567:ios:4e95454a21ea15810fb532",
+            "web": "1:413190928567:web:d59603b20fe831e50fb532"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

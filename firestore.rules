@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Each user's check-ins live at: users/{userId}/checkins/{date}
+    match /users/{userId}/checkins/{date} {
+
+      // Is the person asking the owner of this data?
+      function isOwner() {
+        return request.auth != null && request.auth.uid == userId;
+      }
+
+      // Is the check-in data correct and in range?
+      function isValidCheckin() {
+        let d = request.resource.data;
+        return d.keys().hasOnly(['date', 'sleepHours', 'sleepQuality', 'waterGlasses', 'exerciseMinutes',
+                                 'mood', 'energy', 'stress', 'meals', 'breaks', 'screenTimeHours',
+                                 'caffeineServings', 'phoneAwayBeforeBed', 'note', 'createdAt', 'updatedAt'])
+          && d.date == date
+          && d.sleepHours is number && d.sleepHours >= 0 && d.sleepHours <= 12
+          && d.sleepQuality is int && d.sleepQuality >= 1 && d.sleepQuality <= 5
+          && d.waterGlasses is int && d.waterGlasses >= 0 && d.waterGlasses <= 15
+          && d.exerciseMinutes is int && d.exerciseMinutes >= 0 && d.exerciseMinutes <= 180
+          && d.mood is int && d.mood >= 1 && d.mood <= 5
+          && d.energy is int && d.energy >= 1 && d.energy <= 5
+          && d.stress is int && d.stress >= 1 && d.stress <= 5
+          && d.meals is int && d.meals >= 0 && d.meals <= 6
+          && d.breaks is int && d.breaks >= 0 && d.breaks <= 12
+          && d.screenTimeHours is number && d.screenTimeHours >= 0 && d.screenTimeHours <= 16
+          && d.caffeineServings is int && d.caffeineServings >= 0 && d.caffeineServings <= 10
+          && (d.phoneAwayBeforeBed == null || d.phoneAwayBeforeBed is bool)
+          && (d.note == null || (d.note is string && d.note.length <= 500))
+          && d.updatedAt == request.time;
+      }
+
+      allow read, delete: if isOwner();
+      allow create, update: if isOwner() && isValidCheckin();
+    }
+
+    // User profile data (nickname, goals, etc.)
+    match /users/{userId}/profile {
+      function isOwner() {
+        return request.auth != null && request.auth.uid == userId;
+      }
+
+      allow read, write: if isOwner();
+    }
+
+    // Suggestions data
+    match /users/{userId}/suggestions/{date} {
+      function isOwner() {
+        return request.auth != null && request.auth.uid == userId;
+      }
+
+      allow read, write: if isOwner();
+    }
+
+    // Anything not listed above is blocked automatically.
+  }
+}
